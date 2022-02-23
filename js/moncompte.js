@@ -4,7 +4,6 @@
 
 let User ;
 let DataUser = {}
-
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
@@ -14,33 +13,78 @@ firebase.auth().onAuthStateChanged((user) => {
       User = uid
     var name, email, photoUrl, uid, emailVerified;
     if (user != null) {
- 
+      
+      if (uid == "k3jYVq3VdTaTIYiTyBi3Rx3Pl8J3" ) { // si Admin afficher boutton Admin
+          console.log("Ok");
+          var text = '<button  onclick="admin()" style="max-width: 800px; display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;" name="" id="" class="btn btn-outline-danger" href="#" role="button">Mode Admin </button> '
+          $( "#admin" ).append(text );
+
+      }
       console.log(uid);
       var dbRef = firebase.database().ref().child('user').child(uid).child("party");
       dbRef.child("Larroque3").on('value',  function(snapshot){
+        thePack = snapshot.val().pack
+        if (snapshot.val()==null) {
+          //on affiche un boutton pour acheter des billtes
+          var text = "<br><div style='text-align:center;'><p>Tu n'as pas encore de ticket !Fonce en acheter un!</p></div>"
+          $( "#ticket-list" ).append( text );
+
+        }
+        console.log(snapshot.val());
+        $( "#Larroque3" ).replaceWith("");
+        console.log("ERASE");
           if (snapshot.child("valide").val() == 1) {
               console.log("Ok");
             var click ='onClick="clickTicket('+snapshot.child("valide").val()+",'"+snapshot.child('pack').val()+"'"+')"'
-              var text = '<div onClick="clickTicket('+snapshot.child("valide").val()+",'"+snapshot.child('pack').val()+"'"+')"  data-toggle="modal" data-target="#exampleModal"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px;"> </div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">Premium</p></div> </div>'
+
+              var text = '<div id="Larroque3" onClick="clickTicket('+snapshot.child("valide").val()+",'"+snapshot.child("id").val()+"','"+snapshot.child('pack').val()+"'"+')"  data-toggle="modal" data-target="#exampleModal"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > \
+              <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px;"> </div>\
+               <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">'+snapshot.val().pack+'</p>\
+               </div> </div>'
+
               $( "#ticket-list" ).append( text );
           } else if (snapshot.child("valide").val() == 0) {
-            var text = '<div onClick="clickTicketInvalid()"   class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de validation</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">Premium</p></div> </div>'
+            var dbRefAdmin = firebase.database().ref().child('admin').child('ouverturePaiement');
+              dbRefAdmin.once('value',  function(snapshot){
+                console.log(snapshot.val());
+
+                if (snapshot.val().ouverturePaiement == 0) {
+                  console.log("CLOSE");
+                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(0)"  data-toggle="modal" data-target="#alertModalPaiement"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de Paiement</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
+
+                }
+                else{
+                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(1)" data-toggle="modal" data-target="#alertModalValidation"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de validation</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
+
+                }
             $( "#ticket-list" ).append( text );
+            });
+
+           
           }
     
       console.log(snapshot.val());
 
     
     });
+    
     var dbRef2 = firebase.database().ref().child('user').child(uid)
     dbRef2.on('value',  function(snapshot){
         console.log(snapshot.val());
         DataUser = snapshot.val()
         
-    });
-      //affichage du nom :
+        $( "#myname" ).replaceWith('<h3 id="myname">'+DataUser.firstname+' '+DataUser.name+'</h3>');
+      //affichage des infos :
+      var infoClient = '<div style="display: flex; justify-content: space-evenly;">\
+                         <p><b>Prénom :</b> '+ DataUser.firstname +'</p>\
+                          <p><b>nom :</b> '+ DataUser.name +' </p>\
+                          </div>\
+                          <div ><p style="text-align : center;"><b>Username : </b>@'+DataUser.username +'</p></div>\
+                          <div><p style="text-align : center;"><b>Adresse mail : </b>'+ DataUser.mail +'</p></div>\
+                          <div><p style="text-align : center;"><b>numéro de téléphone : </b>'+ DataUser.phone +'</p></div>'
+      $( "#infoClient" ).append( infoClient );
      
-  
+    });
 
   
       }else{
@@ -64,27 +108,59 @@ firebase.auth().onAuthStateChanged((user) => {
         setTimeout(resolve,n*1000);
     });
 }
-  function clickTicketInvalid(){
-      alert("Votre commande est en cours de traitement. Vous serez notifié par mail et par SMS lors de sa validation")
+
+function closeAlert()   //Onclick du bouton du div
+{
+var alertBox =  document.getElementById("alert"); // On selection le div present dans la page et remplit par nos soins 
+alertBox.innerHTML =""; // Et on le vide de son contenue
+}
+
+
+  function clickTicketInvalid(statut){
+    if (statut == 0) {
+     // alert("Les paiements ne sont pas encore ouvert. Tu seras notifié lorsque tu pourras payer ton ticket")
+    //  alert('Boite de dialogue,<br>sans evennement onclick !');
+    
+    }
+  /*  if ( confirm( "Si vous n'avez pas payer, vous pouvez le faire en cliquant ci-dessous. Si c'est déja fait Vous serez notifié par mail lors de sa validation." ) ) {
+      // Code à éxécuter si le l'utilisateur clique sur "OK"
+      window.open('https://lydia-app.com/collect/53275-conso-soiree/fr', '_blank')
+
+  } else {
+      // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+  }*/
+     // alert("Votre commande est en cours de traitement. Vous serez notifié par mail lors de sa validation")
   }
-  function clickTicket(valid,pack){
+  function clickTicket(valid,id, pack){
     console.log(valid)
     console.log(pack);
     infoTicket = 
         {
             valid : valid,
-            pack : pack
+            pack : pack,
+            id : id
         }
          
     console.log(DataUser)
     console.log(infoTicket)
     console.log("qsdfdsf")
     console.log(User);
+        console.log("IDDDD : ",id);
+    var dbRef2 = firebase.database().ref().child('evenement').child(id)
+    let infoParty = {}
+    dbRef2.once('value',  function(snapshot){
+        console.log("PARTY : ",snapshot.val());
+        infoParty = snapshot.val()
+        console.log("INFOP :::",infoParty);
+        
+    
+    console.log("INFOP :::",infoParty);
   //  document.getElementById("qrcode5")
   $( "#firstname" ).replaceWith('<div id="firstname">Prénom : '+DataUser.firstname+'</div>' );  
   $( "#name" ).replaceWith('<div id="name">Prénom : '+DataUser.name+'</div>' );
-  $( "#username" ).replaceWith('<p id="username" style="text-align: center;font-weight: bold; ">@'+DataUser.username+'</p> ' );   
-  $( "#pack" ).replaceWith('<h2 id="pack" style="text-align: center; text-transform:uppercase">PACK '+DataUser.party.Larroque3.pack+'</h2> ');    
+  $( "#username" ).replaceWith('<p id="username" style="text-align: center;font-weight: bold; ">@'+DataUser.username+'' );   
+  $( "#pack" ).replaceWith('<h2 id="pack" style="text-align: center; text-transform:uppercase">PACK '+DataUser.party.Larroque3.pack+'</h2> ');  
+  $( "#info" ).replaceWith('<div style="text-align: center; id="info"><p style="text-align: center;">Du '+infoParty.dateD+' au '+infoParty.dateF+'</p><i >'+infoParty.Lieu+'</i></div>');   
     $( "#qrcodeTable" ).replaceWith("<div id='qrcodeTable'></div>" );  
     jQuery('#qrcodeTable').qrcode({
   
@@ -92,7 +168,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
 	});	
 
-
+});
 
   }
 
@@ -105,5 +181,13 @@ firebase.auth().onAuthStateChanged((user) => {
      
   }
 
+  function admin(){
+    document.location.href="admin.html";
+  }
+
+  function GoPay(){
+    document.location.href='https://lydia-app.com/collect/53275-conso-soiree/fr';
+ 
+  }
   
 

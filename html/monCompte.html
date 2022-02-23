@@ -18,13 +18,14 @@
   <body>
 
     <div class="header">
-        <h1 style="font-size: 3em; font-family:BonvenoCF ; font-weight: bold ;">BouBou Ticket</h1>
+      <a href="../" style="text-decoration: none;" > <h1 style="font-size: 3em; font-family:BonvenoCF ; font-weight: bold ; color: var(--bs-success); " >BouBou Ticket</h1></a>
         <svg  xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor" class="bi bi-ticket-perforated-fill" viewBox="0 0 16 16">
             <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5Zm4-1v1h1v-1H4Zm1 3v-1H4v1h1Zm7 0v-1h-1v1h1Zm-1-2h1v-1h-1v1Zm-6 3H4v1h1v-1Zm7 1v-1h-1v1h1Zm-7 1H4v1h1v-1Zm7 1v-1h-1v1h1Zm-8 1v1h1v-1H4Zm7 1h1v-1h-1v1Z"/>
           </svg>
     </div>
     <div class="sub-header">
         <h2 style="font-weight: bold;">Mon (super) Compte</h2>
+        <h3 id="myname"></h3>
         
     </div>
 
@@ -58,7 +59,7 @@
 
       <div>
         <h2 id="pack" style="text-align: center;">PACK PREMIUM</h2>
-      
+        <div id="info"><p style="text-align: center; "></p></div>
       </div>
       <div id="stop"></div>
       </div>
@@ -72,6 +73,74 @@
 </div>
 
 
+<div class="modal fade" id="alertModalValidation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div id="modalContent" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title titre-mod" id="ModalLabel">Mon Ticket</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 style="text-align: center;">Ticket en cours de validation</h2>
+        <div id='qrcodeTable'></div>
+
+   
+          <p id="username" style="text-align: center;font-weight: bold; ">Si vous n'avez pas payer, vous pouvez le faire en cliquant ci-dessous. Si c'est déja fait vous serez notifié par mail lors de sa validation.</p>
+ 
+        
+
+      <div>
+
+        <div id="info"><p style="text-align: center; "></p></div>
+      </div>
+      <div id="stop"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" onclick="GoPay()"  class="btn btn-primary">Payer</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="alertModalPaiement" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div id="modalContent" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h1 class="modal-title titre-mod" id="ModalLabel">Mon Ticket</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 style="text-align: center;">Paiment encore fermée</h2>
+        <div id='qrcodeTable'></div>
+
+   
+          <p id="username" style="text-align: center;font-weight: bold; ">Les paiements ne sont pas encore disponibles. Ton billet est pour le moment à l'etat de reservation. Tu seras notifié par mail lors de l'ouverture du paiment Lydia</p>
+ 
+        
+
+      <div>
+
+        <div id="info"><p style="text-align: center; "></p></div>
+      </div>
+      <div id="stop"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 
 
@@ -80,6 +149,8 @@
 
     <div id="playground" style=" margin-bottom: 50px; border: solid; border-color: rgb(255, 255, 255); display: block; width: auto;  padding-left: 10px;padding-right: 10px; border-radius: 30px; " >
         <div class="content"  >
+          <div id="alert"></div>
+          <div id="admin"></div>
           <button  onclick="disconnect()" style="max-width: 800px; display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;" name="" id="" class="btn btn-outline-success" href="#" role="button">Se déconnecter </button>
           <h2 style="font-weight: bold;">Mes billets</h2>
 
@@ -87,10 +158,19 @@
 
 
           </div>
+          <a name="" id="" class="btn btn-outline-dark" href="forfait.html"role="button" style="margin-top : 30px;">Acheter des billets</a>
 
           
           <h2 style="font-weight: bold; margin-top: 40px;">Mes informations</h2>
-          <a name="" id="" class="btn btn-outline-success" href="#" role="button">Mes informations</a>
+        
+          <a name="" id="" class="btn btn-outline-success" href="#collapseExample"role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">Afficher</a>
+
+
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body" id="infoClient">
+
+            </div>
+          </div>
            
 
       </div>
@@ -116,6 +196,9 @@
         <p>Thomas Boursac &copy 2022</p>
       </footer>
 
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
       <!--PDF-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

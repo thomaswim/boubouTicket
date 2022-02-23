@@ -6,6 +6,9 @@ function goPaiement(forfait){
           if (forfait==1) {
             document.location.href="paiementPrem.html";
           }
+          else if(forfait==2){
+            document.location.href="paiementChill.html";
+          }
 
           // ...
         } else {
@@ -19,4 +22,9 @@ function goPaiement(forfait){
       });
 
     //document.location.href="monCompte.html";
+}
+
+function goPage(page){
+  
+  document.location.href=page;
 }

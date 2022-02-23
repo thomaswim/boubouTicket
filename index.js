@@ -50,7 +50,8 @@ firebase.auth().onAuthStateChanged((user) => {
       }
 
       //Changement du boutton connexion :
-      $( "#connexion" ).replaceWith( '<a id="connexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color:#74C686 ; border-color: #74C686; font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="/html/monCompte.html" role="button"><i class="far fa-user-circle"></i></i> Mon Compte</a>' );
+      $( "#Indexconnexion" ).replaceWith( '<a id="Indexconnexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color: var(--bs-success) ; border-color: var(--bs-success); font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="html/monCompte.html" role="button"><i class="far fa-user-circle"></i></i> Mon Compte</a>' );
+      $( "#connexion" ).replaceWith( '<a id="connexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color: var(--bs-success) ; border-color: var(--bs-success); font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="monCompte.html" role="button"><i class="far fa-user-circle"></i></i> Mon Compte</a>' );
 
       // ...
     } else {
@@ -58,7 +59,8 @@ firebase.auth().onAuthStateChanged((user) => {
       // ...
       console.log(user)
       console.log("ddd")
-      $( "#connexion" ).replaceWith( '<a id="connexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color:#74C686 ; border-color: #74C686; font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="/html/connexion.html" role="button"><i class="far fa-user-circle"></i></i> Connexion</a>' );
+      $( "#Indexconnexion" ).replaceWith( '<a id="Indexconnexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color:var(--bs-success) ; border-color:var(--bs-success); font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="html/connexion.html" role="button"><i class="far fa-user-circle"></i></i> Connexion</a>' );
+      $( "#connexion" ).replaceWith( '<a id="connexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color:var(--bs-success) ; border-color:var(--bs-success); font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="connexion.html" role="button"><i class="far fa-user-circle"></i></i> Connexion</a>' );
 
       
     }
@@ -71,7 +73,7 @@ firebase.auth().onAuthStateChanged((user) => {
       }).catch(function(error) {
         console.log(error)
       });
-      document.location.href="/html/connexion.html";
+      document.location.href="connexion.html";
   }
 
 
@@ -89,7 +91,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
 if (a==1) {
-    $( "#connexion" ).replaceWith( '<a id="connexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color:#74C686 ; border-color: #74C686; font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="/html/monCompte.html" role="button"><i class="far fa-user-circle"></i></i> Mon Compte</a>' );
+    $( "#connexion" ).replaceWith( '<a id="connexion" style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color:#74C686 ; border-color: #74C686; font-size: 1.5em; font-weight: bold;" class="btn btn-primary" href="~boursacc/ticket/html/monCompte.html" role="button"><i class="far fa-user-circle"></i></i> Mon Compte</a>' );
     console.log("a=1");
 }
 

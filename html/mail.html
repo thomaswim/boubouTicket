@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gmail API Quickstart</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <p>Gmail API Quickstart</p>
+    <form method="post">
+      <input type="button" value="Send Email" onclick="sendEmail()"/>
+    </form>  
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+ 
+    </script>
+        <script type="text/javascript" >
+          
+function sendEmail() {
+	Email.send({
+	Host: "smtp.gmail.com",
+	Username : "boubou.ticket@gmail.com",
+	Password : "larroque0422",
+	To : 'thomasboursac@gmail.com',
+	From : "boubou.ticket@gmail.com",
+	Subject : "coucou toi ",
+	Body : "Bienvenue !!!",
+	}).then(
+		message => alert("mail sent successfully")
+	);
+}
+        </script>
+
+
+  </body>
+</html>
