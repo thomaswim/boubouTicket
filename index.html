@@ -139,16 +139,70 @@
   <a style="display: block; margin-left: 10%; margin-right: 10% ; margin-top: 20px; background-color:var(--bs-success); border-color: var(--bs-success); font-size: 1.5em; font-weight: bold;" class="btn btn-primary" role="button" href ="html/forfait.html"><b>Reserver mon ticket !</b> </a>
   <a style="text-decoration: underline; color: black; " href="html/CGV.html">Conditions générales</a>
 </div></div>
+<hr>
+<!-- Gallery -->
+<div style="display: flex; flex-direction: column ; justify-content: center; text-align: center;">
+  <H1 style="font-size: 3em;">MEMORIES</H1>
+  <h2 style="font-size: 2em;">Larroque</h2>
+</div>
+<div class="row">
+  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+    <img
+      src="asset/fra.JPG"
+      class="w-100 shadow-1-strong rounded mb-4 flipInY wow animated"
+      alt="Boat on Calm Water"
+    />
+
+    <img
+      src="asset/filles1.JPG"
+      class="w-100 shadow-1-strong rounded mb-4 flipInY wow animated"
+      alt="Wintry Mountain Landscape"
+    />
+  </div>
+
+  <div class="col-lg-4 mb-4 mb-lg-0">
+    <img
+      src="asset/moche.JPG"
+      class="w-100 shadow-1-strong rounded mb-4 flipInY wow animated"
+      alt="Mountains in the Clouds"
+    />
+
+    <img
+      src="asset/group1.JPG"
+      class="w-100 shadow-1-strong rounded mb-4 flipInY wow animated"
+      alt="Boat on Calm Water"
+    />
+  </div>
+
+  <div class="col-lg-4 mb-4 mb-lg-0">
+    <img
+      src="asset/group3.JPG"
+      class="w-100 shadow-1-strong rounded mb-4 flipInY wow animated"
+      alt="Waves at Sea"
+    />
+
+    <img
+      src="asset/geof1.JPG"
+      class="w-100 shadow-1-strong rounded mb-4 flipInY wow animated"
+      alt="Yosemite National Park"
+    />
+  </div>
+</div>
+<!-- Gallery -->
       </div>
     </div>
     <hr>
+    
+
+
+
     <section class="link">
-        <div class="logos">
-          <a href="#"><i class="fab fa-facebook-square fa-2x logo"></i></a>
-          <a href="#"><i class="fab fa-instagram fa-2x logo"></i></a>
-          <a href="#"><i class="fab fa-twitter fa-2x logo"></i></a>
-          <a href="#"><i class="fab fa-youtube fa-2x logo"></i></a>
-        </div>
+      <div class="logos">
+        <a href="https://www.facebook.com/thomas.boursaccervera"><i class="fab fa-facebook-square fa-2x logo"></i></a>
+        <a href="https://www.instagram.com/thomas.bc"><i class="fab fa-instagram fa-2x logo"></i></a>
+        <a href="https://mobile.twitter.com/boursac"><i class="fab fa-twitter fa-2x logo"></i></a>
+        <a href="http://bouboustudio.com"><i class="fab fa-youtube fa-2x logo"></i></a>
+      </div>
 
       </section>
       <!-- END OF LINKS -->
@@ -161,6 +215,54 @@
 
 
 
+      <script type="text/javascript">
+        $(document).ready(function(e) {
+            $('#header_outer').scrollToFixed();
+            $('.res-nav_click').click(function(){
+                $('.main-nav').slideToggle();
+                return false    
+                
+            });
+            
+        });
+    </script> 
+    <script>
+        wow = new WOW(
+          {
+            animateClass: 'animated',
+            offset:       100
+          }
+        );
+        wow.init();
+        document.getElementById('').onclick = function() {
+          var section = document.createElement('section');
+          section.className = 'wow fadeInDown';
+        section.className = 'wow shake';
+        section.className = 'wow zoomIn';
+        section.className = 'wow lightSpeedIn';
+          this.parentNode.insertBefore(section, this);
+        };
+      </script> 
+    <script type="text/javascript">
+      $(window).load(function(){
+        
+        $('a').bind('click',function(event){
+          var $anchor = $(this);
+          
+          $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top - 91
+          }, 1500,'easeInOutExpo');
+          /*
+          if you don't want to use the easing effects:
+          $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+          }, 1000);
+          */
+          event.preventDefault();
+        });
+      })
+    </script> 
+    
 
 
 

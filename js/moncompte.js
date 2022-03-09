@@ -33,13 +33,19 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log(snapshot.val());
         $( "#Larroque3" ).replaceWith("");
         console.log("ERASE");
+        var color = ""
+        if (snapshot.val().pack == "premium") {
+            color="red"
+        }else if(snapshot.val().pack == "chill"){
+            color="green"
+        }else{color = "blue"}
           if (snapshot.child("valide").val() == 1) {
               console.log("Ok");
             var click ='onClick="clickTicket('+snapshot.child("valide").val()+",'"+snapshot.child('pack').val()+"'"+')"'
 
               var text = '<div id="Larroque3" onClick="clickTicket('+snapshot.child("valide").val()+",'"+snapshot.child("id").val()+"','"+snapshot.child('pack').val()+"'"+')"  data-toggle="modal" data-target="#exampleModal"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > \
               <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px;"> </div>\
-               <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">'+snapshot.val().pack+'</p>\
+               <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+snapshot.val().pack+'</p>\
                </div> </div>'
 
               $( "#ticket-list" ).append( text );
@@ -50,11 +56,11 @@ firebase.auth().onAuthStateChanged((user) => {
 
                 if (snapshot.val().ouverturePaiement == 0) {
                   console.log("CLOSE");
-                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(0)"  data-toggle="modal" data-target="#alertModalPaiement"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de Paiement</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
+                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(0)"  data-toggle="modal" data-target="#alertModalPaiement"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de Paiement</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
 
                 }
                 else{
-                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(1)" data-toggle="modal" data-target="#alertModalValidation"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de validation</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : red; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
+                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(1)" data-toggle="modal" data-target="#alertModalValidation"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de validation</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
 
                 }
             $( "#ticket-list" ).append( text );

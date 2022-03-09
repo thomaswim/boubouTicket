@@ -12,6 +12,7 @@ function lydia(pack){
 
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
+          var valide = 1;
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
           var uid = user.uid;
@@ -28,6 +29,12 @@ function lydia(pack){
 
             today = mm + '/' + dd + '/' + yyyy + " ["+ hh+':'+min+']';
             
+            if (snapshot.val().party.Larroque3.valide==1) {
+                alert("Impossible de changer de ticket car celui-ci à déja été payé. Contactez l'organisateur pour plus d'informations")
+                valide = 0
+               
+                
+            }
 
             console.log(snapshot.val().party)
             var newParty = {
@@ -39,12 +46,14 @@ function lydia(pack){
                 }
             }
             console.log(newParty);
-
+            if (snapshot.val().party.Larroque3.valide==0){
             dbRef.child("party").update(newParty)
+            }
           });
 
           dbRef.on('value',  function(snapshot){
             var usr = snapshot.val()
+            if (snapshot.val().party.Larroque3.valide==0){
             Email.send({
               Host: "smtp.gmail.com",
               Username : "boubou.ticket@gmail.com",
@@ -64,8 +73,16 @@ function lydia(pack){
              message => alert("mail sent successfully")
 
             );
+            
         
+
+            //ON verifie si l'user a deja un billet
+
+                // User is signed in, see docs for a list of available properties
+
+          
             document.location.href="Validation.html"; 
+            }
             //alert (snapshot.val().mail)
           });
            
@@ -93,6 +110,8 @@ function lydia(pack){
          
           
         }
+
+
       });
 
 
@@ -112,4 +131,6 @@ function accepter(id){
   $( "#"+id).prop('checked', true);
   $( "#"+id).val()
   console.log($( "#"+id).val());
+
+
 }
