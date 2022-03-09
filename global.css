@@ -15,6 +15,16 @@
         padding: 0;
       }
 
+      .headerIndex{
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        color: var(--bs-success);
+    }
+
 .header{
     margin-left: 10%;
     margin-right: 10%;
@@ -24,6 +34,7 @@
     justify-content: center;
     color: var(--bs-success);
 }
+
 .bold {
     color: var(--bs-success);
 }
