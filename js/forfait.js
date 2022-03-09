@@ -9,7 +9,9 @@ function goPaiement(forfait){
           else if(forfait==2){
             document.location.href="paiementChill.html";
           }
-
+          else if(forfait==3){
+            document.location.href="paiementGeof.html";
+          }
           // ...
         } else {
           // User is signed out
