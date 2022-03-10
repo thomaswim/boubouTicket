@@ -24,6 +24,12 @@ firebase.auth().onAuthStateChanged((user) => {
 
   console.log(snapshot.val());
   object = snapshot.val()
+  var totalTicketValide = 0
+  var totalTicketInvalide = 0
+  var totalTicket = 0
+  var TicketPre = 0
+  var TicketChill = 0
+  var TicketGeoff = 0
   for (var key in object) {
     console.log(key, object[key]);
     console.log(object[key].mail);
@@ -57,17 +63,31 @@ firebase.auth().onAuthStateChanged((user) => {
        // party[i] = object[key].party[i]
        var list_party
        if (object[key].party[i].valide == 0) {
+         totalTicketInvalide = totalTicketInvalide +1;
+         totalTicket = totalTicket +1
         list_party = '<div>\
         <b>'+i+' : </b> Pack <b>'+object[key].party[i].pack+'  </b><button type="button" id="bouttonOff'+key+i+'" onClick="valider('+"'"+key+"'"+','+"'"+i+"'"+')" class="btn btn-danger">Valider</button>\
         <i id="check'+key+i+'" class="fas fa-times"></i></div>\
         '
        }else{
+        totalTicketValide = totalTicketValide +1;
+        totalTicket = totalTicket +1
         list_party = '<div>\
         <b>'+i+' : </b> Pack <b>'+object[key].party[i].pack+'  </b><button type="button" id="bouttonOn'+key+i+'" onClick="retirer('+"'"+key+"'"+','+"'"+i+"'"+')" class="btn btn-success">Retirer</button>\
         <i id="cross'+key+i+'"  class="fas fa-check"></i></div>\
         '  
        }
-
+        //quel ticket ?
+        if (object[key].party[i].pack == "premium") {
+          TicketPre += 1
+        } else if(object[key].party[i].pack == "chill") {
+          TicketChill +=1
+        }else {
+          TicketGeoff+=1
+        }
+        console.log("Geof : "+TicketGeoff);
+        console.log(TicketPre);
+        console.log(object[key].party[i].pack);
 
        $( "#party"+key ).append( list_party);
     }
@@ -97,7 +117,14 @@ firebase.auth().onAuthStateChanged((user) => {
       }
   }*/
   
+  $( "#Stats" ).append( "<p>Tickets Invalides : <b>"+totalTicketInvalide+"</b></p> "  );
+  $( "#Stats" ).append( "<p>Tickets Valides : <b>"+totalTicketValide+"</b> </p> " );
+  $( "#Stats" ).append( "<p>Total Tickets : <b>"+totalTicket+"</b> </p> " );
+  $( "#StatsPack" ).append( "<p>Total Tickets Premium : <b>"+TicketPre+"</b> </p> " );
+  $( "#StatsPack" ).append( "<p>Total Tickets Chill : <b>"+TicketChill+"</b> </p> " );
+  $( "#StatsPack" ).append( "<p>Total Tickets Geoff : <b>"+TicketGeoff+"</b> </p> " );
 
+  console.log(totalTicket);
 });
 
 function valider (id,party){
