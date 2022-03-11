@@ -16,7 +16,7 @@
     <title>BouBou Ticket</title>
   </head>
   <body>
-    <div style="background-color: #74C686; padding-top: 10px;">
+    <div style="background-color: #E97B86; padding-top: 10px;">
     <div  class="header">
       <a href="forfait.html" style="text-decoration: none;" > <h1 style="font-size: 3em; font-family:BonvenoCF ; font-weight: bold ; color: var(--bs-success); color: white; " >BouBou Ticket</h1></a>
         <svg  xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor" class="bi bi-ticket-perforated-fill" viewBox="0 0 16 16" style="color: white " >
@@ -47,11 +47,11 @@
         <p class="card-text">            
           <b>
             <ul style="text-align: left; margin-top: 20px; color: black; font-weight: normal;">
-              <li>2 nuits complètes : <p style="font-weight: normal;">Arrivée le Vendredi 22 Avril et départ    le Dimanche 24 Avril. Si tu connais bien l'organisateur, tu peux même le soudoyer pour avoir un lit réserver pour toi.
+              <li>1 nuit complète : <p style="font-weight: normal;">Arrivée le Vendredi 23 Avril et départ    le Dimanche 24 Avril. Si tu connais bien l'organisateur, tu peux même le soudoyer pour avoir un lit réserver pour toi.
               </p></li>
               <li> Boissons et nourritures <u>NON</u> inclus :<p style="font-weight: normal;"> Tu dois impérativement ramener quelque chose! Et pas un vieux paquet de chips ouvert que t'as trouvé au fond de ton placard. Une petite Grey Goose ça serait top !
               </p></li>
-              <li> <u>SANS</u> assurance  : <p style="font-weight: normal;">Si t'as une petite coulante le jour du départ et que malheureusement, tu dois rester dans tes WC chez toi tant pis pour toi. On ne pourra pas te remboursé… Voir les <a href="CGV.html">conditions de remboursement ici</a>
+              <li> <u>AVEC</u> assurance  : <p style="font-weight: normal;">Si t'as une petite coulante le jour du départ et que malheureusement, tu dois rester dans tes WC chez toi tant pis pour toi. On ne pourra pas te remboursé… Voir les <a href="CGV.html">conditions de remboursement ici</a>
               </p></li>
               <li>Ton nom dans les crédits : <p style="font-weight: normal;">Si t'as l'habitude de regarder les génériques de fin au cinéma, t'auras la chance de voir ton nom à l'écran avec une dédicace ! Histoire de rendre fière toute ta famille après t'avoir vu t'enfiler une bouteille de Vodka cul sec !
               </p></li>
@@ -119,7 +119,7 @@
 
 <div    class="card" style=" margin-top: 30px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 20px; max-width: 400px; display: block; margin-left: auto; margin-right: auto" > 
   <div class="card-body text-success">
-    <h5 class="card-title" style="font-weight: bold;  color:#74C686;">Pack Chill</h5>
+    <h5 class="card-title" style="font-weight: bold;  color:#E97B86;">Pack Chill</h5>
     <p class="card-text">            
       <b>
       <ul style="text-align: left; margin-top: 20px; color: black;">
@@ -127,9 +127,9 @@
         <li>Boissons et nourritures <u>non</u> inclus</li>
       </ul></b></p>
   </div>
-      <div class="card-footer bg-transparent" style="border-color: #74C686; display: flex; justify-content: space-between;">
+      <div class="card-footer bg-transparent" style="border-color: #E97B86; display: flex; justify-content: space-between;">
         <div style="font-size: 1.5em;"><b>TOTAL</b></div>
-        <div><b  id="PrixPaiChill" style="color:#74C686 ; font-size: 1.5em;"></b></div>
+        <div><b  id="PrixPaiChill" style="color:#E97B86 ; font-size: 1.5em;"></b></div>
       </div>
 </div>
 
@@ -146,11 +146,12 @@
         <label class="form-check-label" for="exampleCheck1">J'ai lu et j'accepte les  <a style="text-decoration: underline;" data-toggle="modal" data-target="#exampleModal2">conditions générales</a></label>
       </div>
     </div>
-
-    <button type="button" onclick="lydia('chill')"  class="btn btn-primary" data-dismiss="modal" style="display: inline ; justify-content: space-evenly ;align-content: center; border-radius: 10px; margin-top: 20px;">
+    
+    <button id="loading" type="button" onclick="lydia('chill')"  class="btn btn-primary" data-dismiss="modal" style="display: inline ; justify-content: space-evenly ;align-content: center; border-radius: 10px; margin-top: 20px;">
      <h3>Réserver mon Pack</h3> 
       <img  width="40" height="auto"src="../asset/lydia.png">
     </button>
+    
     </div>
     </div>
 

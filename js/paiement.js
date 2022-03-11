@@ -50,6 +50,11 @@ function lydia(pack){
             dbRef.child("party").update(newParty)
             }
           });
+          $( "#loading").replaceWith('<div style = "margin-top : 50px"class="d-flex justify-content-center">\
+          <div class="spinner-border" role="status">\
+            <span class="sr-only">Loading...</span>\
+          </div>\
+        </div>')
 
           dbRef.on('value',  function(snapshot){
             var usr = snapshot.val()
@@ -65,13 +70,13 @@ function lydia(pack){
                 Votre demande de ticket pour participer à <i>Larroque : 3<sup>ème</sup></i> Dose avec le pack <b>"+ pack +"</b> à bien été prise en compte.<br>\
                 Les paiments sont actuellement férmés. Vous serez notifiés quand il sera possible de payer.<br><br>\
                 Une fois votre paiement éfféctué, nos équipes s'efforceront de vérifier votre paiement afin de valider votre billet. <br>\
-                Vous recevrez un e-mail lorsque cette commande sera validé.<br>\
+                Vous recevrez un e-mail lorsque cette commande sera validé.<br><br>\
                 Vous pouvez aussi consulter l'état de votre commande dans l'onglet <i>'mon compte'</i> sur www.boubou-ticket.fr<br><br>\
                 Toute l'équipe de Boubou Company &reg; vous remercie de votre fidélité<br><br>\
                 Votre fidèle organisateur,<br>\
                 Boubou",
             }).then(
-             message => alert("mail sent successfully")
+             message => document.location.href="Validation.html"
 
             );
             
@@ -82,7 +87,7 @@ function lydia(pack){
                 // User is signed in, see docs for a list of available properties
 
           
-            document.location.href="Validation.html"; 
+           // document.location.href="Validation.html"; 
             }
             //alert (snapshot.val().mail)
           });
@@ -116,7 +121,7 @@ function lydia(pack){
       });
 
 
-      console.log(userdb);
+      //console.log(userdb);
     
     }
     else{
