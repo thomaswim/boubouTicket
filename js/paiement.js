@@ -60,12 +60,13 @@ function lydia(pack){
               Password : "larroque0422",
               To :  usr.mail,
               From : "boubou.ticket@gmail.com",
-              Subject : usr.firstname + ", votre demande à bien été enregistrée",
+              Subject : usr.firstname + ", votre demande à bien été enregistrée!",
               Body : "<strong>Bonjour "+ usr.firstname+"</strong><br><br>\
                 Votre demande de ticket pour participer à <i>Larroque : 3<sup>ème</sup></i> Dose avec le pack <b>"+ pack +"</b> à bien été prise en compte.<br>\
-                Nos équipes sont actuellement en train de vérifier votre paiement. <br>\
+                Les paiments sont actuellement férmés. Vous serez notifiés quand il sera possible de payer.<br><br>\
+                Une fois votre paiement éfféctué, nos équipes s'efforceront de vérifier votre paiement afin de valider votre billet. <br>\
                 Vous recevrez un e-mail lorsque cette commande sera validé.<br>\
-                Vous pouvez aussi consulté l'état de votre commande dans l'onglet <i>'mon compte'</i> sur www.boubou-ticket.com<br><br>\
+                Vous pouvez aussi consulter l'état de votre commande dans l'onglet <i>'mon compte'</i> sur www.boubou-ticket.fr<br><br>\
                 Toute l'équipe de Boubou Company &reg; vous remercie de votre fidélité<br><br>\
                 Votre fidèle organisateur,<br>\
                 Boubou",
