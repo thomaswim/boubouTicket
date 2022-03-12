@@ -39,7 +39,7 @@ dbRef2.once('value',  function(snapshot){
   console.log(snapshot.val());
 
     prix = snapshot.child("PrixPre").val()
-    $("#prixPre").append('                  <h1 style="color:#E97B86 ; font-weight:800 ; margin-bottom: 20px; font-size: 2em;">'+prix+' &euro;<sub style="font-weight: lighter; font-size: 0.5em;">TTC</sub></h1>    ')
+    $("#prixPre").append(' <h1 style="color:#E97B86 ; font-weight:800 ; margin-bottom: 20px; font-size: 2em;">'+prix+' &euro;<sub style="font-weight: lighter; font-size: 0.5em;">TTC</sub></h1>    ')
   //pages infos
   $("#PrixInfoPre").append(prix+"&euro;")
     //paiement
