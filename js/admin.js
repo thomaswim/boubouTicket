@@ -69,7 +69,7 @@ firebase.auth().onAuthStateChanged((user) => {
         <b>'+i+' : </b> Pack <b>'+object[key].party[i].pack+'  </b><button type="button" id="bouttonOff'+key+i+'" onClick="valider('+"'"+key+"'"+','+"'"+i+"'"+')" class="btn btn-danger">Valider</button>\
         <i id="check'+key+i+'" class="fas fa-times"></i></div>\
         '
-       }else{
+       }else if (object[key].party[i].valide == 1) {
         totalTicketValide = totalTicketValide +1;
         totalTicket = totalTicket +1
         list_party = '<div>\
@@ -77,13 +77,18 @@ firebase.auth().onAuthStateChanged((user) => {
         <i id="cross'+key+i+'"  class="fas fa-check"></i></div>\
         '  
        }
+       else if  (object[key].party[i].valide == -1){
+
+        list_party = '<div>\
+        <b>'+i+' : </b> Pack <b>'+object[key].party[i].pack+'  Terminé\
+        <i id="cross'+key+i+'"  class="fas fa-check"></i></div>\
+        '  
+       }
         //quel ticket ?
-        if (object[key].party[i].pack == "premium") {
+        if (object[key].party[i].pack == "premium" && object[key].party[i].valide != -1) {
           TicketPre += 1
-        } else if(object[key].party[i].pack == "chill") {
+        } else if(object[key].party[i].pack == "chill" && object[key].party[i].valide != -1) {
           TicketChill +=1
-        }else {
-          TicketGeoff+=1
         }
         console.log("Geof : "+TicketGeoff);
         console.log(TicketPre);
@@ -121,8 +126,7 @@ firebase.auth().onAuthStateChanged((user) => {
   $( "#Stats" ).append( "<p>Tickets Valides : <b>"+totalTicketValide+"</b> </p> " );
   $( "#Stats" ).append( "<p>Total Tickets : <b>"+totalTicket+"</b> </p> " );
   $( "#StatsPack" ).append( "<p>Total Tickets Premium : <b>"+TicketPre+"</b> </p> " );
-  $( "#StatsPack" ).append( "<p>Total Tickets Chill : <b>"+TicketChill+"</b> </p> " );
-  $( "#StatsPack" ).append( "<p>Total Tickets Geoff : <b>"+TicketGeoff+"</b> </p> " );
+  $( "#StatsPack" ).append( "<p>Total Tickets Geoff : <b>"+TicketChill+"</b> </p> " );
 
   console.log(totalTicket);
 });
@@ -232,7 +236,7 @@ function openPay(){
 }
 }
 function closePay(){
-  if ( confirm( "Ouvrir les paiements?" ) ) {
+  if ( confirm( "Fermer les paiements?" ) ) {
     var dbRefAdmin = firebase.database().ref().child('admin').child('ouverturePaiement');
     var newStatut = {
       ouverturePaiement : 0

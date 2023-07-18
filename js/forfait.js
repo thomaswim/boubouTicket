@@ -34,7 +34,7 @@ function goPage(page){
   document.location.href=page;
 }
 
-var dbRef2 = firebase.database().ref().child('evenement').child("01");
+var dbRef2 = firebase.database().ref().child('evenement').child("02");
 dbRef2.once('value',  function(snapshot){
   console.log(snapshot.val());
 
@@ -56,13 +56,6 @@ dbRef2.once('value',  function(snapshot){
 
 
 
-    prix = snapshot.child("PrixGeof").val()
-    $("#prixGeof").append('<h1 style="color:#007BFF ; font-weight:800 ; margin-bottom: 20px; font-size: 2em;">'+prix+' &euro;<sub style="font-weight: lighter; font-size: 0.5em;">TTC</sub></h1>')
-  //pages infos
-  $("#PrixInfoGeof").append(prix+"&euro;")
-    //paiement
-    $("#PrixPaiGeof").append(prix+",00 &euro;")
-  
 
 
 })

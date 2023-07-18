@@ -14,62 +14,77 @@ firebase.auth().onAuthStateChanged((user) => {
     var name, email, photoUrl, uid, emailVerified;
     if (user != null) {
       
-      if (uid == "k3jYVq3VdTaTIYiTyBi3Rx3Pl8J3" ) { // si Admin afficher boutton Admin
+      if ((uid == "k3jYVq3VdTaTIYiTyBi3Rx3Pl8J3") ||( uid="wlXwaQgMoTh9HcnzmODDkq3oIIf2")) { // si Admin afficher boutton Admin
           console.log("Ok");
           var text = '<button  onclick="admin()" style="max-width: 800px; display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;" name="" id="" class="btn btn-outline-danger" href="#" role="button">Mode Admin </button> '
           $( "#admin" ).append(text );
 
       }
       console.log(uid);
+
       var dbRef = firebase.database().ref().child('user').child(uid).child("party");
-      dbRef.child("Larroque3").on('value',  function(snapshot){
-        thePack = snapshot.val().pack
-        if (snapshot.val()==null) {
-          //on affiche un boutton pour acheter des billtes
-          var text = "<br><div style='text-align:center;'><p>Tu n'as pas encore de ticket !Fonce en acheter un!</p></div>"
-          $( "#ticket-list" ).append( text );
+        dbRef.on('value', function(snapshot){
+          if(snapshot.exists()) {
+            console.log(snapshot.val());
+            snapshot.forEach(function(childSnapshot) {
+              var partyName = childSnapshot.key;
+              var partyDetails = childSnapshot.val();
+              var thePack = partyDetails.pack;
 
-        }
-        console.log(snapshot.val());
-        $( "#Larroque3" ).replaceWith("");
-        console.log("ERASE");
-        var color = ""
-        if (snapshot.val().pack == "premium") {
-            color="red"
-        }else if(snapshot.val().pack == "chill"){
-            color="green"
-        }else{color = "blue"}
-          if (snapshot.child("valide").val() == 1) {
-              console.log("Ok");
-            var click ='onClick="clickTicket('+snapshot.child("valide").val()+",'"+snapshot.child('pack').val()+"'"+')"'
+              console.log(partyDetails);
+              $( "#" + partyName ).replaceWith("");
+              console.log("ERASE");
+              var color = ""
+              if (partyDetails.pack == "premium") {
+                  color="red"
+              } else if(partyDetails.pack == "chill") {
+                  color="green"
+              } else {
+                  color = "blue"
+              }
+              if (partyDetails.valide == 1) {
+                console.log("Ok");
+                var click ='onClick="clickTicket('+partyDetails.valide+",'"+partyDetails.pack+"'"+')"'
+                var text = '<div id="'+partyName+'" onClick="clickTicket('+partyDetails.valide+",'"+partyDetails.id+"','"+partyDetails.pack+"'"+')"  data-toggle="modal" data-target="#exampleModal"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > \
+                <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px;"> </div>\
+                <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">'+partyName+'</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+partyDetails.pack+'</p>\
+                </div> </div>'
+                $( "#ticket-list" ).append( text );
+              } else if (partyDetails.valide == 0) {
+                var dbRefAdmin = firebase.database().ref().child('admin').child('ouverturePaiement');
+                dbRefAdmin.once('value',  function(snapshot){
+                  console.log(snapshot.val());
+                  if (snapshot.val().ouverturePaiement == 0) {
+                    console.log("CLOSE");
+                    var text = '<div id="'+partyName+'" onClick="clickTicketInvalid(0)"  data-toggle="modal" data-target="#alertModalPaiement"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de Paiement</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Banou`s Birthday</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+partyDetails.pack+'</p></div> </div>'
 
-              var text = '<div id="Larroque3" onClick="clickTicket('+snapshot.child("valide").val()+",'"+snapshot.child("id").val()+"','"+snapshot.child('pack').val()+"'"+')"  data-toggle="modal" data-target="#exampleModal"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > \
-              <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px;"> </div>\
-               <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+snapshot.val().pack+'</p>\
-               </div> </div>'
+                  }
+                  else{
+                    var text = '<div id="Larroque3" onClick="clickTicketInvalid(1)" data-toggle="modal" data-target="#alertModalValidation"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">Clickez pour payer</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Banou`s Birthday</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
 
+                  }
               $( "#ticket-list" ).append( text );
-          } else if (snapshot.child("valide").val() == 0) {
-            var dbRefAdmin = firebase.database().ref().child('admin').child('ouverturePaiement');
-              dbRefAdmin.once('value',  function(snapshot){
-                console.log(snapshot.val());
 
-                if (snapshot.val().ouverturePaiement == 0) {
-                  console.log("CLOSE");
-                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(0)"  data-toggle="modal" data-target="#alertModalPaiement"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de Paiement</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
-
-                }
-                else{
-                  var text = '<div id="Larroque3" onClick="clickTicketInvalid(1)" data-toggle="modal" data-target="#alertModalValidation"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: bloc; margin-left: auto; margin-right: auto" > <div class="card-img-top" src="../asset/larroque.jpg.JPG" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/larroque.jpg.JPG'"+');background-size: 400px; display : flex; justify-content : center; flex-direction :column; filter: grayscale(100%);"> <h3 style="text-align : center; color : white;vertical-align: middle; font-weight : bold">En attente de validation</h3>     <div class="spinner-border text-success" role="status"  style ="display : block ; margin-left : auto; margin-right : auto"> <span class="sr-only">Loading...</span> </div></div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style = "font-size : 0.8em;color : '+color+'; margin-bottom : -7px; margin-top : -7px">'+thePack+'</p></div> </div>'
-
-                }
-            $( "#ticket-list" ).append( text );
-            });
-
+                });
+              
            
-          }
+          }else if (partyDetails.valide == -1) {
+            console.log();
+            var click ='onClick="clickTicket('+partyDetails.valide+",'"+partyDetails.pack+"'"+')"'
+            var text = '<div id="'+partyName+'" onClick="clickTicketInvalid(0)"  data-toggle="modal" data-target="#alertModalPaiement"  class="card" style=" margin-top: 10px; box-shadow: 5px 5px 10px 1px rgba(56, 56, 56, 0.2); border-radius: 30px; max-width: 400px; display: block; margin-left: auto; margin-right: auto" > <div class="card-img-top" alt="Card image cap" style="border-radius: 30px 30px 0 0; height: 150px; background: no-repeat url('+"'../asset/group3.JPG'"+'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; flex-direction: column; filter: grayscale(100%);"> <h3 style="text-align: center; color: white; font-weight: bold">Terminé</h3>    </div> <div class="card-body"> <h5 class="card-title" style="font-weight: bold;">Larroque : 3ème Dose</h5><p style="font-size: 0.8em; color: '+color+'; margin-bottom: -7px; margin-top: -7px">'+partyDetails.pack+'</p></div> </div>';
+     
+            $( "#ticket-list" ).append( text );
     
-      console.log(snapshot.val());
+          } else {
+            //on affiche un boutton pour acheter des billets
+            var text = "<br><div style='text-align:center;'><p>Tu n'as pas encore de ticket !Fonce en acheter un!</p></div>"
+            $( "#ticket-list" ).append( text );
+          }
+        });
+      }
+
+            
+              console.log(snapshot.val());
 
     
     });
@@ -192,7 +207,7 @@ alertBox.innerHTML =""; // Et on le vide de son contenue
   }
 
   function GoPay(){
-    document.location.href='https://lydia-app.com/collect/53275-conso-soiree/fr';
+    document.location.href='https://lydia-app.com/pots?id=83623-larroque-5-x-bday-banou';
  
   }
   

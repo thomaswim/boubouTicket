@@ -38,11 +38,12 @@ function lydia(pack){
 
             console.log(snapshot.val().party)
             var newParty = {
-                ["Larroque3"] :{
-                    id : "01",
+                ["BanouBday"] :{
+                    id : "02",
                     pack :pack,
                     valide : 0,
-                    precommandeDate : today
+                    precommandeDate : today,
+                    name : 'Banou Birthday'
                 }
             }
             console.log(newParty);
@@ -71,8 +72,11 @@ function lydia(pack){
                 Votre fidèle organisateur,<br>\
                 Boubou",
             }).then(
-             message => alert("mail sent successfully")
-
+              message => {
+             // alert("mail sent successfully")
+              // Redirect to another page after email is sent
+              window.location.href = "Validation.html";
+          }
             );
             
         
@@ -82,7 +86,7 @@ function lydia(pack){
                 // User is signed in, see docs for a list of available properties
 
           
-            document.location.href="Validation.html"; 
+            //document.location.href="Validation.html"; 
             }
             //alert (snapshot.val().mail)
           });
@@ -116,7 +120,7 @@ function lydia(pack){
       });
 
 
-      console.log(userdb);
+
     
     }
     else{
